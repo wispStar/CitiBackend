@@ -1,4 +1,4 @@
-package com.example.utils;
+package com.bondsales.utils;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

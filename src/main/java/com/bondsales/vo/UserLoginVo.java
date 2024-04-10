@@ -1,4 +1,4 @@
-package com.example.vo;
+package com.bondsales.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

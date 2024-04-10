@@ -1,6 +1,6 @@
-package com.example;
+package com.bondsales;
 
-import com.example.enums.AppHttpCodeEnum;
+import com.bondsales.enums.AppHttpCodeEnum;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.io.Serializable;

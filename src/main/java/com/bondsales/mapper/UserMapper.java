@@ -1,7 +1,7 @@
-package com.example.mapper;
+package com.bondsales.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.example.entity.User;
+import com.bondsales.entity.User;
 
 
 /**

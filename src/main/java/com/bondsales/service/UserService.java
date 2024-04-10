@@ -1,8 +1,8 @@
-package com.example.service;
+package com.bondsales.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.example.ResponseResult;
-import com.example.entity.User;
+import com.bondsales.ResponseResult;
+import com.bondsales.entity.User;
 
 
 /**
@@ -13,4 +13,6 @@ import com.example.entity.User;
  */
 public interface UserService extends IService<User> {
     ResponseResult register(User user);
+
+    ResponseResult login(User user);
 }

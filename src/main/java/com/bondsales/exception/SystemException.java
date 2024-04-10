@@ -1,6 +1,6 @@
-package com.example.exception;
+package com.bondsales.exception;
 
-import com.example.enums.AppHttpCodeEnum;
+import com.bondsales.enums.AppHttpCodeEnum;
 
 public class SystemException extends RuntimeException{
     private int code;

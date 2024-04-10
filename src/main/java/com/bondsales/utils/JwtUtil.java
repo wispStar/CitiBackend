@@ -1,4 +1,4 @@
-package com.example.utils;
+package com.bondsales.utils;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;

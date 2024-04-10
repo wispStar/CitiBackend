@@ -1,8 +1,8 @@
-package com.example.controller;
+package com.bondsales.controller;
 
-import com.example.ResponseResult;
-import com.example.entity.User;
-import com.example.service.UserService;
+import com.bondsales.ResponseResult;
+import com.bondsales.entity.User;
+import com.bondsales.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,6 +19,11 @@ public class UserController {
     @PostMapping("/register")
     public ResponseResult register(@RequestBody User user) {
         return userService.register(user);
+    }
+
+    @PostMapping("/login")
+    public ResponseResult login(@RequestBody User user) {
+        return userService.login(user);
     }
 
 }
