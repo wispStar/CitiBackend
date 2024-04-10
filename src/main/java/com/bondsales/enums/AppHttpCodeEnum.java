@@ -8,7 +8,9 @@ public enum AppHttpCodeEnum {
     PASSWORD_NOT_NULL(-2, "Password cannot be empty"),
     USER_EXISTS(-101,"User already exists"),
     // 用户登录模块
-    LOGIN_ERROR(-101,"Invalid credentials");
+    LOGIN_ERROR(-101,"Invalid credentials"),
+    // 债券查询模块
+    BOND_NOT_FOUND(-102,"Bond not found");
 
     int code;
     String msg;
