@@ -1,0 +1,82 @@
+{
+    "username":"alice",
+    "password":"1234"
+}
+{
+    "code": 0,
+    "msg": "Success",
+    "data": {
+        "username": "alice",
+        "email": null,
+        "phoneNumber": null,
+        "address": null
+    }
+}
+=======================================================================
+{
+    "username":"bob",
+    "password":"1234",
+    "email":"bob@example.com"
+}
+{
+    "code": 0,
+    "msg": "Success",
+    "data": {
+        "username": "bob",
+        "email": "bob@example.com",
+        "phoneNumber": null,
+        "address": null
+    }
+}
+=======================================================================
+{
+    "username":"cindy",
+    "password":"1234",
+    "email":"cindy@example.com",
+    "phoneNumber":"1234567890"
+}
+{
+    "code": 0,
+    "msg": "Success",
+    "data": {
+        "username": "cindy",
+        "email": "cindy@example.com",
+        "phoneNumber": "1234567890",
+        "address": null
+    }
+}
+=======================================================================
+{
+    "username":"david",
+    "password":"1234",
+    "email":"david@example.com",
+    "phoneNumber":"9876543210",
+    "address":"123 Street, City, Country"
+}
+{
+    "code": 0,
+    "msg": "Success",
+    "data": {
+        "username": "david",
+        "email": "david@example.com",
+        "phoneNumber": "9876543210",
+        "address": "123 Street, City, Country"
+    }
+}
+{
+    "code": -101,
+    "msg": "User already exists"
+}
+=======================================================================
+=======================================================================
+=======================================================================
+{
+    "password":"1234",
+    "email":"david@example.com",
+    "phoneNumber":"9876543210",
+    "address":"123 Street, City, Country"
+}
+{
+    "code": -1,
+    "msg": "Username cannot be empty"
+}
