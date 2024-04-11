@@ -3,10 +3,12 @@ server:
 spring:
   datasource:
 #    url: jdbc:mysql://123.249.107.2:3306/bond?characterEncoding=utf-8&serverTimezone=Asia/Shanghai
-    url: jdbc:mysql://localhost:3306/citi
+#    url: jdbc:mysql://localhost:3306/citi
+    url: jdbc:mysql://localhost:3306/bond?characterEncoding=utf-8&serverTimezone=Asia/Shanghai
     username: root
 #    password: P@ssword123
-    password: 12345678
+#    password: 12345678
+    password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
 
 mybatis-plus:
