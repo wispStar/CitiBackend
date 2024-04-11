@@ -41,6 +41,7 @@ CREATE TABLE transaction (
     transactionAmount DECIMAL(10, 2) NOT NULL, 
     transactionTime TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     transactionType ENUM('buy', 'sell') NOT NULL,
+    quantity INT NOT NULL DEFAULT 1,
     FOREIGN KEY (cusip) REFERENCES product(cusip),
     FOREIGN KEY (username) REFERENCES bond_user(username)
 );

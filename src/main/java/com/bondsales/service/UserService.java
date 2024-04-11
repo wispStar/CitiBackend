@@ -15,4 +15,7 @@ public interface UserService extends IService<User> {
     ResponseResult register(User user);
 
     ResponseResult login(User user);
+
+    // 获取用户个人信息
+    ResponseResult getUserProfile(String username);
 }

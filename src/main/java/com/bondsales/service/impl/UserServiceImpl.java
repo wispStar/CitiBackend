@@ -13,6 +13,7 @@ import com.bondsales.utils.BeanCopyUtils;
 import com.bondsales.utils.JwtUtil;
 import com.bondsales.utils.PasswordEncoder;
 import com.bondsales.vo.UserLoginVo;
+import com.bondsales.vo.UserProfileVo;
 import com.bondsales.vo.UserRegisterVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -125,5 +126,15 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(User::getUsername, username);
         return  count(queryWrapper) > 0;
+    }
+
+    @Override
+    public ResponseResult getUserProfile(String username) {
+        User user = getOne(new LambdaQueryWrapper<User>().eq(User::getUsername, username));
+        if (user == null) {
+            return new ResponseResult(-109, "User profile not found", null);
+        }
+        UserProfileVo userProfileVo = BeanCopyUtils.copyBean(user, UserProfileVo.class);
+        return ResponseResult.okResult(userProfileVo);
     }
 }
