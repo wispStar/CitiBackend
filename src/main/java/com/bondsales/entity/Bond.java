@@ -38,4 +38,24 @@ public class Bond {
     //排名
     @TableField(exist = false)
     private String rank;
+
+    public String getProductName() {
+        return productname;
+    }
+
+    public String getProductDescription() {
+        return productdescription;
+    }
+
+    public double getStartingValue() {
+        return startingvalue;
+    }
+
+    public double getMinimumBidIncrement() {
+        return minimumbidincrement;
+    }
+
+    public Date getAuctionDeadline() {
+        return auctiondeadline;
+    }
 }
