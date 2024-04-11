@@ -3,11 +3,16 @@ package com.bondsales.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bondsales.ResponseResult;
+import com.bondsales.constants.SystemConstants;
 import com.bondsales.entity.Bid;
+import com.bondsales.entity.Bond;
 import com.bondsales.enums.AppHttpCodeEnum;
 import com.bondsales.exception.SystemException;
 import com.bondsales.mapper.BidMapper;
+import com.bondsales.mapper.BondMapper;
 import com.bondsales.service.BidService;
+import com.bondsales.utils.BeanCopyUtils;
+import com.bondsales.vo.BidCreateVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +26,31 @@ import org.springframework.stereotype.Service;
 public class BidServiceImpl extends ServiceImpl<BidMapper, Bid> implements BidService {
 
     @Autowired
+    private BondMapper bondMapper;
+
+    @Autowired
     private BidMapper bidMapper;
+
+    @Override
+    public ResponseResult create(String cusip) {
+        // 根据cusip查询该债券在数据库中的信息
+        LambdaQueryWrapper<Bond> queryWrapper =new LambdaQueryWrapper<>();
+        queryWrapper.eq(Bond::getCusip, cusip);
+        Bond bond = bondMapper.selectOne(queryWrapper);
+
+        // 债券不存在
+        if (bond == null) {
+            throw new SystemException(AppHttpCodeEnum.BOND_NOT_EXISTS);
+        } else {
+            // 债券存在, 封装信息返回
+            //        数据库    实体类    Vo
+            // 正常   下划线     驼峰     驼峰
+            // 现在   驼峰       小写     驼峰
+            BidCreateVo bidCreateVo = BeanCopyUtils.copyBean(bond, BidCreateVo.class);
+
+            return ResponseResult.okResult(bidCreateVo);
+        }
+    }
 
     @Override
     public ResponseResult delete(String cusip, String username) {

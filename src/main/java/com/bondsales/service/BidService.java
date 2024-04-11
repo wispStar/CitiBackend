@@ -13,5 +13,7 @@ import com.bondsales.entity.Bid;
  */
 public interface BidService extends IService<Bid> {
 
+    ResponseResult create(String cusip);
+
     ResponseResult delete(String cusip, String username);
 }

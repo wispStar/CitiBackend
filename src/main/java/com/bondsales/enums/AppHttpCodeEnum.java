@@ -14,6 +14,8 @@ public enum AppHttpCodeEnum {
     BOND_NOT_FOUND(-102,"Bond not found"),
 
 
+    // 创建竞拍模块
+    FAILED_CREATE_BID(-104, "Failed to create bid"),
     // 删除竞拍数据出价模块
     DELETE_BOND_NOT_FOUND(-105,"Bond not found"),
 
@@ -27,7 +29,9 @@ public enum AppHttpCodeEnum {
     // 删除竞拍数据出价模块
     DELETE_BID_FAILED(-3, "Delete bid failed"),
     // 用户退出模块
-    USER_NOT_EXISTS(-4, "User isn't exists");
+    USER_NOT_EXISTS(-4, "User isn't exists"),
+    // 创建竞拍模块
+    BOND_NOT_EXISTS(-5, "Bond isn't exists");
 
     int code;
     String msg;
