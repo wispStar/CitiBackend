@@ -137,4 +137,32 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         UserProfileVo userProfileVo = BeanCopyUtils.copyBean(user, UserProfileVo.class);
         return ResponseResult.okResult(userProfileVo);
     }
+
+    @Override
+    public ResponseResult logout(String username) {
+        // 根据username查找用户
+        // 当status为"1"时, 修改status为"0"
+        LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(User::getUsername, username);
+        User user = userMapper.selectOne(queryWrapper);
+
+        // 用户不存在
+        if (user == null) {
+            throw new SystemException(AppHttpCodeEnum.USER_NOT_EXISTS);
+        } else {
+            // 用户未登录
+            if (user.getStatus().equals(SystemConstants.NOT_LOG_IN)) {
+                throw new SystemException(AppHttpCodeEnum.USER_NOT_ONLINE);
+            } else {
+                // 用户已登录
+                // 置用户状态status为"1"
+                user.setStatus(SystemConstants.NOT_LOG_IN);
+
+                // 更新数据库
+                updateById(user);
+
+                return ResponseResult.okResult(username);
+            }
+        }
+    }
 }

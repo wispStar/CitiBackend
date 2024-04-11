@@ -18,4 +18,6 @@ public interface UserService extends IService<User> {
 
     // 获取用户个人信息
     ResponseResult getUserProfile(String username);
+
+    ResponseResult logout(String username);
 }

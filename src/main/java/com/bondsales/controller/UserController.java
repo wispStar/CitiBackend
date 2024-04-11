@@ -27,4 +27,9 @@ public class UserController {
     public ResponseResult getUserProfile(@RequestParam String username) {
         return userService.getUserProfile(username);
     }
+
+    @PostMapping("/logout")
+    public ResponseResult logout(@RequestParam String username) {
+        return userService.logout(username);
+    }
 }
