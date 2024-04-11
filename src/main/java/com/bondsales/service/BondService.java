@@ -5,5 +5,5 @@ import com.bondsales.ResponseResult;
 import com.bondsales.entity.Bond;
 
 public interface BondService extends IService<Bond> {
-    ResponseResult showAll(Bond bond);
+    ResponseResult showAll();
 }

@@ -21,20 +21,20 @@ public class Bond {
     //CUISP认证标识
     private String cusip;
     //产品名称
-    private String productName;
+    private String productname;
     //产品内容描述
-    private String productDescription;
+    private String productdescription;
     //持仓，产品总金额
     private int position;
     //起始价格
-    private double startingValue;
+    private double startingvalue;
     //当前价格
     @TableField(exist = false)
-    private int bidValue;
+    private int bidvalue;
     //最低出价增量
-    private double minimumBidIncrement;
+    private double minimumbidincrement;
     //地址
-    private Date auctionDeadline;
+    private Date auctiondeadline;
     //排名
     @TableField(exist = false)
     private String rank;

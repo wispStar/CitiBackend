@@ -17,8 +17,9 @@ public class BondServiceImpl extends ServiceImpl<BondMapper, Bond> implements Bo
 
     @Autowired
     private BondMapper bondMapper;
+
     @Override
-    public ResponseResult showAll(Bond bond){
+    public ResponseResult showAll(){
         // 使用 bondMapper 的 selectList 方法获取所有的 Bond 对象
         List<Bond> bonds = bondMapper.selectList(null);
         if (bonds == null) {

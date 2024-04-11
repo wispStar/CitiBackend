@@ -14,8 +14,8 @@ public class BondController {
     private BondService bondService;
 
     @GetMapping("/list")
-    public ResponseResult showAll(@RequestBody Bond bond) {
-        return bondService.showAll(bond);
+    public ResponseResult showAll() {
+        return bondService.showAll();
     }
 
 //    @GetMapping("/list")
