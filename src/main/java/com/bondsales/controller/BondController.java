@@ -2,7 +2,6 @@ package com.bondsales.controller;
 
 import com.bondsales.ResponseResult;
 import com.bondsales.entity.Bond;
-import com.bondsales.entity.User;
 import com.bondsales.service.BondService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

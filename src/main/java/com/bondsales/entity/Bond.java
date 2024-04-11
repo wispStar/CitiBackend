@@ -19,7 +19,7 @@ public class Bond {
     private Long id;
 
     //CUISP认证标识
-    private String cuisp;
+    private String cusip;
     //产品名称
     private String productName;
     //产品内容描述
