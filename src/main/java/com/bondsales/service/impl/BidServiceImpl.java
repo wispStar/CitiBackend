@@ -16,11 +16,15 @@ import com.bondsales.service.BondService;
 import com.bondsales.service.UserService;
 import com.bondsales.utils.BeanCopyUtils;
 import com.bondsales.vo.BidCreateVo;
+import com.bondsales.vo.BidDetailsVo;
+import com.bondsales.vo.ProductInfoVo;
+import com.bondsales.vo.UserBidsVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * (Bid)表服务实现类
@@ -123,5 +127,32 @@ public class BidServiceImpl extends ServiceImpl<BidMapper, Bid> implements BidSe
                 throw new SystemException(AppHttpCodeEnum.DELETE_BID_FAILED);
             }
         }
+    }
+
+    @Override
+    public ResponseResult details(String cusip) {
+        // 1. 根据cusip查询债券bond信息
+        LambdaQueryWrapper<Bond> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(Bond::getCusip, cusip);
+        Bond bond = bondMapper.selectOne(queryWrapper);
+
+        // 封装成ProductInfoVo对象
+        ProductInfoVo productInfoVo = BeanCopyUtils.copyBean(bond, ProductInfoVo.class);
+
+        // 2. 根据cusip查询所有持有该债券的用户信息
+        LambdaQueryWrapper<Bid> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(Bid::getCusip, cusip);
+        wrapper.orderByDesc(Bid::getBidamount);
+        List<Bid> bids = bidMapper.selectList(wrapper);
+
+        // 封装成UserBidsVo对象
+        List<UserBidsVo> userBidsVos = BeanCopyUtils.copyBeanList(bids, UserBidsVo.class);
+        // 给UserBidsVo对象中的ranking字段赋值
+        userBidsVos.stream()
+                .forEach(userBidsVo -> userBidsVo.setRanking((userBidsVos.indexOf(userBidsVo) + 1) + "/" + userBidsVos.size()));
+
+        // 3. 封装返回
+        BidDetailsVo bidDetailsVo = new BidDetailsVo(productInfoVo, userBidsVos);
+        return ResponseResult.okResult(bidDetailsVo);
     }
 }

@@ -26,4 +26,9 @@ public class BidController {
     public ResponseResult delete(@PathVariable("cusip") String cusip, @RequestParam String username) {
         return bidService.delete(cusip, username);
     }
+
+    @GetMapping("/details/{cusip}")
+    public ResponseResult details(@PathVariable("cusip") String cusip) {
+        return bidService.details(cusip);
+    }
 }
