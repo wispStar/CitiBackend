@@ -6,15 +6,21 @@ import com.bondsales.ResponseResult;
 import com.bondsales.constants.SystemConstants;
 import com.bondsales.entity.Bid;
 import com.bondsales.entity.Bond;
+import com.bondsales.entity.User;
 import com.bondsales.enums.AppHttpCodeEnum;
 import com.bondsales.exception.SystemException;
 import com.bondsales.mapper.BidMapper;
 import com.bondsales.mapper.BondMapper;
 import com.bondsales.service.BidService;
+import com.bondsales.service.BondService;
+import com.bondsales.service.UserService;
 import com.bondsales.utils.BeanCopyUtils;
 import com.bondsales.vo.BidCreateVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+
+import java.util.Date;
 
 /**
  * (Bid)表服务实现类
@@ -29,10 +35,21 @@ public class BidServiceImpl extends ServiceImpl<BidMapper, Bid> implements BidSe
     private BondMapper bondMapper;
 
     @Autowired
+    private UserService userService;
+
+    @Autowired
+    private BondService bondService;
+
+    @Autowired
     private BidMapper bidMapper;
 
     @Override
     public ResponseResult create(String cusip) {
+        // 对数据进行非空判断
+        if (!StringUtils.hasText(cusip)) {
+            throw new SystemException(AppHttpCodeEnum.CUSIP_NOT_NULL);
+        }
+
         // 根据cusip查询该债券在数据库中的信息
         LambdaQueryWrapper<Bond> queryWrapper =new LambdaQueryWrapper<>();
         queryWrapper.eq(Bond::getCusip, cusip);
@@ -50,6 +67,39 @@ public class BidServiceImpl extends ServiceImpl<BidMapper, Bid> implements BidSe
 
             return ResponseResult.okResult(bidCreateVo);
         }
+    }
+
+    @Override
+    public ResponseResult submit(String cusip, String username, Double bidAmount) {
+        // 对数据进行非空判断
+        if (!StringUtils.hasText(cusip)) {
+            throw new SystemException(AppHttpCodeEnum.CUSIP_NOT_NULL);
+        }
+        if (!StringUtils.hasText(username)) {
+            throw new SystemException(AppHttpCodeEnum.USERNAME_NOT_NULL);
+        }
+        if (bidAmount == null) {
+            throw new SystemException(AppHttpCodeEnum.BidAmount_NOT_NULL);
+        }
+
+        // 对数据进行存在判断
+        if (!bondService.bondExist(cusip)) {
+            throw new SystemException(AppHttpCodeEnum.BOND_NOT_EXISTS);
+        }
+        if (!userService.userNameExist(username)) {
+            throw new SystemException(AppHttpCodeEnum.USER_NOT_EXISTS);
+        }
+
+        // 向数据库中添加数据
+        Bid bid = new Bid();
+        bid.setCusip(cusip);
+        bid.setUsername(username);
+        bid.setBidamount(bidAmount);
+        // 获取当前时间并设置给bidtime字段
+        Date currentTime = new Date();
+        bid.setBidtime(currentTime);
+        bidMapper.insert(bid);
+        return ResponseResult.okResult();
     }
 
     @Override

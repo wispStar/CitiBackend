@@ -3,6 +3,9 @@ package com.bondsales.entity;
 import java.util.Date;
 
 import java.io.Serializable;
+
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,7 +32,7 @@ public class Bid  {
     private String username;
 
     private Double bidamount;
-
+    
     private Date bidtime;
     
 }

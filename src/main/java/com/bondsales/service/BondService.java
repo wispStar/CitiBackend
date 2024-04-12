@@ -6,4 +6,6 @@ import com.bondsales.entity.Bond;
 
 public interface BondService extends IService<Bond> {
     ResponseResult showAll();
+
+    boolean bondExist(String cusip);
 }

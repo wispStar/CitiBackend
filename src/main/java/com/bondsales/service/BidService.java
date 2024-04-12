@@ -15,5 +15,7 @@ public interface BidService extends IService<Bid> {
 
     ResponseResult create(String cusip);
 
+    ResponseResult submit(String cusip, String username, Double bidAmount);
+
     ResponseResult delete(String cusip, String username);
 }

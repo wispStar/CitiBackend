@@ -122,7 +122,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
 
-    private boolean userNameExist(String username) {
+    public boolean userNameExist(String username) {
         LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(User::getUsername, username);
         return  count(queryWrapper) > 0;
@@ -140,6 +140,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     public ResponseResult logout(String username) {
+        // 对数据进行非空判断
+        if (!StringUtils.hasText(username)) {
+            throw new SystemException(AppHttpCodeEnum.USERNAME_NOT_NULL);
+        }
+
         // 根据username查找用户
         // 当status为"1"时, 修改status为"0"
         LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();

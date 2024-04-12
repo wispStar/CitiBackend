@@ -1,9 +1,11 @@
 package com.bondsales.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bondsales.ResponseResult;
 import com.bondsales.entity.Bond;
+import com.bondsales.entity.User;
 import com.bondsales.enums.AppHttpCodeEnum;
 import com.bondsales.exception.SystemException;
 import com.bondsales.mapper.BondMapper;
@@ -59,5 +61,11 @@ public class BondServiceImpl extends ServiceImpl<BondMapper, Bond> implements Bo
 
         // 返回创建的 ResponseResult 对象
         return result;
+    }
+
+    public boolean bondExist(String cusip) {
+        LambdaQueryWrapper<Bond> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(Bond::getCusip, cusip);
+        return  count(queryWrapper) > 0;
     }
 }
