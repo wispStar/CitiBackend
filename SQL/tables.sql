@@ -1,6 +1,6 @@
 CREATE TABLE `bond_user` (
     `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
-    `username` varchar(64) NOT NULL DEFAULT 'NULL' COMMENT '用户名',
+    `username` varchar(255) NOT NULL DEFAULT 'NULL' COMMENT '用户名',
     `password` varchar(64) NOT NULL DEFAULT 'NULL' COMMENT '密码',
     `token` varchar(255) DEFAULT NULL COMMENT '用户登录成功后由系统颁发的身份验证令牌',
     `email` varchar(64) DEFAULT NULL COMMENT '邮箱',
@@ -27,7 +27,7 @@ CREATE TABLE bid (
     id INT AUTO_INCREMENT PRIMARY KEY,
     cusip VARCHAR(255) NOT NULL,
     username VARCHAR(255) NOT NULL,
-    bidAmount DECIMAL(10, 2) NOT NULL,
+    bidValue DECIMAL(10, 2) NOT NULL,
     bidTime TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (cusip) REFERENCES product(cusip),
     FOREIGN KEY (username) REFERENCES bond_user(username)
