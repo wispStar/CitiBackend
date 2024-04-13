@@ -31,7 +31,7 @@ public class Bid  {
 
     private String username;
 
-    private Double bidamount;
+    private Double bidvalue;
     
     private Date bidtime;
     

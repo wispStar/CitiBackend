@@ -22,8 +22,13 @@ public class BidController {
         return bidService.submit(cusip, username, bidAmount);
     }
 
+    @PostMapping("/submitedit")
+    public ResponseResult submitEdit(@RequestParam("cusip") String cusip, @RequestParam("username") String username, @RequestParam("bidAmount") Double bidAmount) {
+        return bidService.update(cusip, username, bidAmount);
+    }
+
     @DeleteMapping("/delete/{cusip}")
-    public ResponseResult delete(@PathVariable("cusip") String cusip, @RequestParam String username) {
+    public ResponseResult delete(@PathVariable("cusip") String cusip, @RequestParam("username") String username) {
         return bidService.delete(cusip, username);
     }
 

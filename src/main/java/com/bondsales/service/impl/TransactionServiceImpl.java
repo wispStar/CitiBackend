@@ -6,6 +6,7 @@ import com.bondsales.entity.Transaction;
 import com.bondsales.mapper.TransactionMapper;
 import com.bondsales.service.TransactionService;
 import com.bondsales.vo.TransactionVo;
+import com.bondsales.vo.UserNameVo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,11 +20,13 @@ import java.util.List;
 @Service("transactionService")
 public class TransactionServiceImpl extends ServiceImpl<TransactionMapper, Transaction> implements TransactionService {
     @Override
-    public ResponseResult getTransactionHistory(String username) {
+    public ResponseResult getTransactionHistory(UserNameVo userNameVo) {
+        String username = userNameVo.getUsername();
         List<TransactionVo> history = baseMapper.findTransactionHistoryByUsername(username);
-        if (history.isEmpty()) {
-            return new ResponseResult(-110, "Transaction history not found", null);
-        }
+        //前端代码中已经处理了history为空的情况，所以这里不需要再次处理
+//        if (history.isEmpty()) {
+//            return new ResponseResult(-110, "Transaction history not found", null);
+//        }
         return new ResponseResult(0, "Success", history);
     }
 }

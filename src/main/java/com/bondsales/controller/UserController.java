@@ -3,6 +3,7 @@ package com.bondsales.controller;
 import com.bondsales.ResponseResult;
 import com.bondsales.entity.User;
 import com.bondsales.service.UserService;
+import com.bondsales.vo.UserNameVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,7 +30,7 @@ public class UserController {
     }
 
     @PostMapping("/logout")
-    public ResponseResult logout(@RequestParam String username) {
-        return userService.logout(username);
+    public ResponseResult logout(@RequestBody UserNameVo userNameVo) {
+        return userService.logout(userNameVo);
     }
 }

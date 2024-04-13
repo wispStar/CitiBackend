@@ -22,7 +22,7 @@ INSERT INTO product (cusip, productName, productDescription, position, startingV
 ('CUSIP009', 'Product 9', 'Description 9', 90, 9000.00, 450.00, '2024-12-31'),
 ('CUSIP010', 'Product 10', 'Description 10', 100, 10000.00, 500.00, '2024-12-31');
 
-INSERT INTO bid (cusip, username, bidAmount) VALUES
+INSERT INTO bid (cusip, username, bidValue) VALUES
 ('CUSIP001', 'user1', 1050.00),
 ('CUSIP002', 'user2', 2100.00),
 ('CUSIP003', 'user3', 3150.00),

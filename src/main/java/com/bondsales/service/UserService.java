@@ -3,6 +3,7 @@ package com.bondsales.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.bondsales.ResponseResult;
 import com.bondsales.entity.User;
+import com.bondsales.vo.UserNameVo;
 
 
 /**
@@ -21,5 +22,5 @@ public interface UserService extends IService<User> {
     // 获取用户个人信息
     ResponseResult getUserProfile(String username);
 
-    ResponseResult logout(String username);
+    ResponseResult logout(UserNameVo userNameVo);
 }

@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UserBidsVo {
     private String username;
-    private Double bidamount;
+    private Double bidvalue;
     private String ranking;
 }

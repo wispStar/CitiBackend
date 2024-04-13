@@ -13,6 +13,10 @@ public enum AppHttpCodeEnum {
     // 债券查询模块
     BOND_NOT_FOUND(-102,"Bond not found"),
 
+    // 债券添加模块
+    INVALID_NULL(-102,"Invalid null in bond's information"),
+    BOND_EXISTS(-102,"User already exists"),
+
 
     // 创建竞拍模块
     // 提交竞价数据

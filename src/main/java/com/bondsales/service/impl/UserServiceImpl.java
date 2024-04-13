@@ -13,6 +13,7 @@ import com.bondsales.utils.BeanCopyUtils;
 import com.bondsales.utils.JwtUtil;
 import com.bondsales.utils.PasswordEncoder;
 import com.bondsales.vo.UserLoginVo;
+import com.bondsales.vo.UserNameVo;
 import com.bondsales.vo.UserProfileVo;
 import com.bondsales.vo.UserRegisterVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -139,18 +140,19 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
-    public ResponseResult logout(String username) {
+    public ResponseResult logout(UserNameVo userNameVo) {
         // 对数据进行非空判断
-        if (!StringUtils.hasText(username)) {
+        if (!StringUtils.hasText(userNameVo.getUsername())) {
             throw new SystemException(AppHttpCodeEnum.USERNAME_NOT_NULL);
         }
 
         // 根据username查找用户
         // 当status为"1"时, 修改status为"0"
         LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(User::getUsername, username);
+        queryWrapper.eq(User::getUsername, userNameVo.getUsername());
         User user = userMapper.selectOne(queryWrapper);
 
+        System.out.println(user);
         // 用户不存在
         if (user == null) {
             throw new SystemException(AppHttpCodeEnum.USER_NOT_EXISTS);
@@ -166,7 +168,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
                 // 更新数据库
                 updateById(user);
 
-                return ResponseResult.okResult(username);
+                return ResponseResult.okResult(userNameVo.getUsername());
             }
         }
     }
