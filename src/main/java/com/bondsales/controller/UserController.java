@@ -24,8 +24,8 @@ public class UserController {
         return userService.login(user);
     }
 
-    @GetMapping("/profile")
-    public ResponseResult getUserProfile(@RequestParam String username) {
+    @GetMapping("/profile/{username}")
+    public ResponseResult getUserProfile(@PathVariable String username) {
         return userService.getUserProfile(username);
     }
 

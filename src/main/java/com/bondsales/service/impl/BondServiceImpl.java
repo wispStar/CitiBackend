@@ -83,7 +83,7 @@ public class BondServiceImpl extends ServiceImpl<BondMapper, Bond> implements Bo
                 bondShowVo.setRanking(ranking + "/" + allBids.size());
             } else {
                 // 如果用户在这个bond上没有竞价记录，设置ranking为You haven't bid yet!
-                bondShowVo.setRanking("You haven't bid yet");
+                bondShowVo.setRanking("Haven't bid yet");
             }
 
             // 将 BondShowVo 对象添加到列表中
